@@ -1,0 +1,8 @@
+#!/bin/bash
+set -x
+oc projects | grep suite.*-15 | xargs -P40 kubectl delete namespace
+oc projects | grep main-15 | xargs  -P40  kubectl delete namespace
+oc projects | grep osdk-e2e-* | xargs  -P40 kubectl delete namespace --grace-period=0 --force
+oc projects | grep kuttl.* | xargs -P40 kubectl delete namespace
+kubectl delete namespace jaeger-e2e-multiinstance-test
+k delete namespace israel
